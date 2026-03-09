@@ -1,0 +1,26 @@
+using System.Text.Json.Serialization;
+
+namespace MinecraftRecipes;
+
+public class SmeltingRecipe : IRecipe, IHasUnitResult
+{
+    public const string Type = "minecraft:smelting";
+
+    [JsonPropertyName("category")]
+    public string? Category { get; set; } = "misc";
+
+    [JsonPropertyName("group")]
+    public string? Group { get; set; } = null;
+
+    [JsonPropertyName("ingredient")]
+    public required object Ingredient { get; set; }
+
+    [JsonPropertyName("cookingtime")]
+    public int CookingTime { get; set; } = 200;
+
+    [JsonPropertyName("result")]
+    public required UnitResult Result { get; set; }
+
+    [JsonPropertyName("experience")]
+    public double? Experience { get; set; } = null;
+}
