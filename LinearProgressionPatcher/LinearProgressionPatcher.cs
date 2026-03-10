@@ -122,14 +122,14 @@ internal class Program
         RecipePatcher patcher = new(copperEquipmentProvider);
         foreach (string recipePath in Directory.EnumerateFiles(Directories.Minecraft.Recipes))
         {
-            if (Path.GetExtension(recipePath) != ".json")
+            if (!Path.GetExtension(recipePath).Equals(".json", StringComparison.OrdinalIgnoreCase))
             {
                 continue;
             }
 
             string recipeJsonString = File.ReadAllText(recipePath);
             IRecipe recipe = JsonSerializer.Deserialize<IRecipe>(recipeJsonString)!;
-            if (patcher.Patch(recipe))
+            if (patcher.TryPatch(recipe))
             {
                 recipeJsonString = JsonSerializer.Serialize(recipe, jsonSerializerOptions);
                 File.WriteAllText(recipePath, recipeJsonString);
