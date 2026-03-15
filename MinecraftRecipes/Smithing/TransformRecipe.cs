@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace MinecraftRecipes.Smithing;
 
-public class TransformRecipe : ISmithingRecipe
+public class TransformRecipe : ISmithingRecipe, IHasUnitResult
 {
     public const string Type = "minecraft:smithing_transform";
 
@@ -14,4 +14,7 @@ public class TransformRecipe : ISmithingRecipe
 
     [JsonPropertyName("addition")]
     public object? Addition { get; set; } = null;
+
+    [JsonPropertyName("result")]
+    public required UnitResult Result { get; set; }
 }
